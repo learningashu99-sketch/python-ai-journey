@@ -20,8 +20,9 @@ python-ai-journey/
 │   ├── random_and_reshape.py
 │   └── statistics_functions.py
 
-##Progress
-will try to addd daily commits
+# Learning-Goal
+This repository documents my daily progress in learning Python for AI and Data Science.
+
 ## Goal
 
 Build a strong foundation in Python for AI, data science, and machine learning.
