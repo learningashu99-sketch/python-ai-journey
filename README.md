@@ -8,6 +8,8 @@ This repository contains my learning progress in Python for AI and Data Science.
 - Array Basics
 - Indexing and Slicing
 - 2D Arrays
+- random and reshape function
+- statistics_functions
 
 ## Structure
 
