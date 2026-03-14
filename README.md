@@ -1,30 +1,68 @@
-# python-ai-journey
+# Python → AI Learning Journey
 
-This repository contains my learning progress in Python for AI and Data Science.
+![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge\&logo=python\&logoColor=white)
+![NumPy](https://img.shields.io/badge/NumPy-013243?style=for-the-badge\&logo=numpy\&logoColor=white)
+![Pandas](https://img.shields.io/badge/Pandas-150458?style=for-the-badge\&logo=pandas\&logoColor=white)
 
-## Topics Covered
+Welcome to my learning repository where I document my journey of mastering **Python for Artificial Intelligence, Data Science, and Machine Learning**.
+
+This repository follows a **structured 30-day roadmap** where I learn new concepts daily and implement them through hands-on coding.
+
+---
+
+## Current Progress
+
+**Day 9 / 30**
 
 ### NumPy
-- Array Basics
-- Indexing and Slicing
-- 2D Arrays
-- random and reshape function
-- statistics_functions
 
-## Structure
+* Array creation
+* Indexing and slicing
+* 2D arrays
+* Reshaping arrays
+* Random number generation
+* Statistical functions
+* Sorting arrays
+* Finding unique values
+* Combining arrays
 
-python-ai-journey/
+### Pandas
+
+* Series
+* DataFrame
+* Viewing data (`head`, `tail`)
+* Reading CSV files (`read_csv`)
+* Dataset structure (`info`)
+* Statistical summaries (`describe`)
+
+---
+
+## Repository Structure
+
+```text
+python-ai-journey
 │
 ├── numpy
-│   ├── arrays_basics.py
-│   ├── indexing_slicing.py
-│   ├── two_d_arrays.py
-│   ├── random_and_reshape.py
-│   └── statistics_functions.py
+├── pandas
+├── datasets
+└── README.md
+```
 
-# Learning-Goal
-This repository documents my daily progress in learning Python for AI and Data Science.
+---
 
-## Goal
+## Learning Goal
 
-Build a strong foundation in Python for AI, data science, and machine learning.
+Build a strong foundation in:
+
+* Data Analysis
+* Data Visualization
+* Machine Learning
+
+By practicing consistently and building projects along the way.
+
+---
+
+## Author
+
+CSAI Student
+Learning **Python, AI, and Data Science** through daily practice.
