@@ -10,23 +10,32 @@ This repository follows a **structured 30-day roadmap** where I learn new concep
 
 ---
 
-## Current Progress
+# Current Progress
 
-**Day 9 / 30**
+**Day 11 / 30**
 
-### NumPy
+---
+
+## NumPy
+
+Topics learned:
 
 * Array creation
 * Indexing and slicing
 * 2D arrays
 * Reshaping arrays
 * Random number generation
+* Mathematical operations
 * Statistical functions
 * Sorting arrays
 * Finding unique values
 * Combining arrays
 
-### Pandas
+---
+
+## Pandas
+
+Topics learned:
 
 * Series
 * DataFrame
@@ -34,27 +43,35 @@ This repository follows a **structured 30-day roadmap** where I learn new concep
 * Reading CSV files (`read_csv`)
 * Dataset structure (`info`)
 * Statistical summaries (`describe`)
+* Filtering rows and columns
+* Data selection using conditions
+* Data cleaning basics
+* Handling missing values (`fillna`, `isnull`)
 
 ---
 
-## Repository Structure
+# Repository Structure
 
 ```text
 python-ai-journey
 │
-├── numpy
-├── pandas
+├── week1_numpy
+│
+├── week2_pandas
+│
 ├── datasets
+│
 └── README.md
 ```
 
 ---
 
-## Learning Goal
+# Learning Goal
 
 Build a strong foundation in:
 
 * Data Analysis
+* Data Cleaning
 * Data Visualization
 * Machine Learning
 
@@ -62,7 +79,21 @@ By practicing consistently and building projects along the way.
 
 ---
 
-## Author
+# Next Learning Step
+
+**Day 12 – Data Aggregation with Pandas**
+
+Upcoming topics:
+
+* `groupby()`
+* `mean()`
+* `sum()`
+* `count()`
+* `value_counts()`
+
+---
+
+# Author
 
 CSAI Student
 Learning **Python, AI, and Data Science** through daily practice.
