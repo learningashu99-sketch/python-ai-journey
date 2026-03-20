@@ -1,115 +1,99 @@
-# Python → AI Learning Journey
+# 🚀 Python → AI Learning Journey
 
 ![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge\&logo=python\&logoColor=white)
 ![NumPy](https://img.shields.io/badge/NumPy-013243?style=for-the-badge\&logo=numpy\&logoColor=white)
 ![Pandas](https://img.shields.io/badge/Pandas-150458?style=for-the-badge\&logo=pandas\&logoColor=white)
 
-Welcome to my learning repository where I document my journey of mastering **Python for Artificial Intelligence, Data Science, and Machine Learning**.
+---
 
-This repository follows a **structured 30-day roadmap** where I learn new concepts daily and implement them through hands-on coding.
+## 📌 Overview
+
+This repository documents my **30-day journey** of learning Python for:
+
+* Artificial Intelligence
+* Data Science
+* Machine Learning
+
+Each day focuses on **concepts + hands-on implementation**.
 
 ---
 
-# Current Progress
+## 📈 Current Progress
 
 **Day 14 / 30**
 
 ---
 
-## NumPy
+## 🧠 Skills Covered
 
-Topics learned:
+### 🔢 NumPy
 
-* Array creation
-* Indexing and slicing
-* 2D arrays
+* Array operations
+* Indexing & slicing
 * Reshaping arrays
 * Random number generation
-* Mathematical operations
 * Statistical functions
-* Sorting arrays
-* Finding unique values
-* Combining arrays
+* Sorting & combining arrays
+
+### 📊 Pandas
+
+* DataFrames & Series
+* CSV handling
+* Filtering & selection
+* Data cleaning
+* Handling missing values
 
 ---
 
-## Pandas
+## 📁 Mini Projects
 
-Topics learned:
+### 🎓 Student Dataset Analyzer (Day 12–13)
 
-* Series
-* DataFrame
-* Viewing data (`head`, `tail`)
-* Reading CSV files (`read_csv`)
-* Dataset structure (`info`)
-* Statistical summaries (`describe`)
-* Filtering rows and columns
-* Data selection using conditions
-* Data cleaning basics
-* Handling missing values (`fillna`, `isnull`)
+* Data analysis using Pandas
+* Filtering, aggregation, and ranking
+* Insight extraction from dataset
+
+📂 Location: `week2_pandas/`
 
 ---
 
-# Mini Project — Student Dataset Analyzer (Day 12–13)
-
-This project analyzes student performance using Pandas.
-
-### Features:
-
-* Load and inspect dataset
-* Find top students in each subject
-* Calculate average marks
-* Rank students
-* Identify best overall student
-* Filter high-performing students
-* Assign performance labels (Excellent, Good, Needs Improvement)
-
-### File:
-
-```
-week2_pandas/student_analyzer.py
-```
-
----
-
-# Repository Structure
+## 📂 Repository Structure
 
 ```text
-python-ai-journey
+python-ai-learning
 │
-├── week1_numpy
+├── week1_numpy/
+├── week2_pandas/
+│   ├── student_analyzer.py
+│   └── README.md
 │
-├── week2_pandas
-│   └── student_analyzer.py
-│
-├── datasets
+├── datasets/
 │   └── students.csv
 │
+├── requirements.txt
 └── README.md
 ```
 
 ---
 
-# Learning Goal
+## 🛠 Tech Stack
 
-Build a strong foundation in:
-
-* Data Analysis
-* Data Cleaning
-* Data Visualization
-* Machine Learning
-
-By practicing consistently and building projects along the way.
+* Python
+* NumPy
+* Pandas
 
 ---
 
-# Next Learning Step
+## 🎯 Learning Goals
 
-**Day 15 – Data Visualization (Matplotlib)**
+* Build strong foundations in data analysis
+* Learn data visualization techniques
+* Develop machine learning models
+* Create real-world AI projects
 
 ---
 
-# Author
+## 👨‍💻 Author
 
 CSAI Student
-Learning **Python, AI, and Data Science** through daily practice.
+Learning Python, AI, and Data Science through consistent daily practice.
