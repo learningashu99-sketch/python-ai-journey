@@ -12,7 +12,7 @@ This repository follows a **structured 30-day roadmap** where I learn new concep
 
 # Current Progress
 
-**Day 11 / 30**
+**Day 14 / 30**
 
 ---
 
@@ -50,6 +50,28 @@ Topics learned:
 
 ---
 
+# Mini Project — Student Dataset Analyzer (Day 12–13)
+
+This project analyzes student performance using Pandas.
+
+### Features:
+
+* Load and inspect dataset
+* Find top students in each subject
+* Calculate average marks
+* Rank students
+* Identify best overall student
+* Filter high-performing students
+* Assign performance labels (Excellent, Good, Needs Improvement)
+
+### File:
+
+```
+week2_pandas/student_analyzer.py
+```
+
+---
+
 # Repository Structure
 
 ```text
@@ -58,8 +80,10 @@ python-ai-journey
 ├── week1_numpy
 │
 ├── week2_pandas
+│   └── student_analyzer.py
 │
 ├── datasets
+│   └── students.csv
 │
 └── README.md
 ```
@@ -81,15 +105,7 @@ By practicing consistently and building projects along the way.
 
 # Next Learning Step
 
-**Day 12 – Data Aggregation with Pandas**
-
-Upcoming topics:
-
-* `groupby()`
-* `mean()`
-* `sum()`
-* `count()`
-* `value_counts()`
+**Day 15 – Data Visualization (Matplotlib)**
 
 ---
 
