@@ -1,9 +1,9 @@
-🚀 Python → AI Learning Journey
+# 🚀 Python → AI Learning Journey
 
-"Python" (https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
-"NumPy" (https://img.shields.io/badge/NumPy-013243?style=for-the-badge&logo=numpy&logoColor=white)
-"Pandas" (https://img.shields.io/badge/Pandas-150458?style=for-the-badge&logo=pandas&logoColor=white)
-"Matplotlib" (https://img.shields.io/badge/Matplotlib-11557c?style=for-the-badge)
+![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge\&logo=python\&logoColor=white)
+![NumPy](https://img.shields.io/badge/NumPy-013243?style=for-the-badge\&logo=numpy\&logoColor=white)
+![Pandas](https://img.shields.io/badge/Pandas-150458?style=for-the-badge\&logo=pandas\&logoColor=white)
+![Matplotlib](https://img.shields.io/badge/Matplotlib-11557c?style=for-the-badge)
 
 ---
 
@@ -41,7 +41,7 @@ Day 20 / 30
 📊 Pandas
 
 * DataFrames & Series
-* CSV handling ("read_csv")
+* CSV handling (`read_csv`)
 * Filtering & selection
 * Data cleaning
 * Handling missing values
@@ -65,7 +65,7 @@ Day 20 / 30
 * Filtering, aggregation, and ranking
 * Insight extraction from dataset
 
-📂 Location: "week2_pandas/"
+📂 Location: `week2_pandas/`
 
 ---
 
@@ -76,7 +76,7 @@ Day 20 / 30
 * Saved graphs as images
 * Demonstrated data storytelling
 
-📂 Location: "week3_visualization/"
+📂 Location: `week3_visualization/`
 
 ---
 
