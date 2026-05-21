@@ -7,7 +7,8 @@ df = pd.read_csv("F:/python ai journey/projects/student_performance_system/data/
 
 #input
 X = df[["hours_studied", "attendance", "sleep_hours", "practice_tests"]]
-
+hours, attendance, sleep_hours,practice_tests = map(float,input().split())
+new_data = [[hours,attendance,sleep_hours,practice_tests]]
 #output
 Y = df["marks"]
 
@@ -21,36 +22,20 @@ model = LinearRegression()
 model.fit(x_train,y_train)
 
 #Predict 
-y_pred = model.predict(x_test)
+y_pred = model.predict(new_data)
 
 #Evaluation 
 r2 = r2_score(y_test,y_pred)
 mae = mean_absolute_error(y_test,y_pred)
 mse = mean_squared_error(y_test,y_pred)
 
-
-####Now the real game......................
-
-hours, attendance, sleep_hours,practice_tests = map(
-    float,input("Enter study hours, attendance, sleep hours, and practice tests: ").split())
-new_data = [[hours,attendance,sleep_hours,practice_tests]]
-
-#New data for predcition
-c_pred = model.predict(new_data)
-
 #Print information
+print("X_train: \n",x_train)
+print("X_test: \n",x_test)
+print("Actual:", y_test.values)
+print("Predicted:", y_pred.round(2))
 
-print("\nActual Values: \n", y_test.values)
-print("\nPredicted Values:\n", y_pred.round(2))
 
-print("\nModel Evaluattion....\n")
 print("R2 Score: ", round(r2,2))
 print("MAE: ",round(mae,2))
 print("MSE: ", round(mse,2))
-
-print("\nCustom Student Prediction:")
-print("Predicted Marks:", round(c_pred[0], 2))
-
-
-
-
