@@ -33,7 +33,11 @@ mse = mean_squared_error(y_test,y_pred)
 
 hours, attendance, sleep_hours,practice_tests = map(
     float,input("Enter study hours, attendance, sleep hours, and practice tests: ").split())
-new_data = [[hours,attendance,sleep_hours,practice_tests]]
+
+new_data = pd.DataFrame(
+    [[hours, attendance, sleep_hours, practice_tests]],
+    columns=["hours_studied", "attendance", "sleep_hours", "practice_tests"]
+)
 
 #New data for predcition
 c_pred = model.predict(new_data)
@@ -49,7 +53,9 @@ print("MAE: ",round(mae,2))
 print("MSE: ", round(mse,2))
 
 print("\nCustom Student Prediction:")
-print("Predicted Marks:", round(c_pred[0], 2))
+predicted_marks = max(0, min(100, c_pred[0]))
+
+print("Predicted Marks:", round(predicted_marks, 2))
 
 
 

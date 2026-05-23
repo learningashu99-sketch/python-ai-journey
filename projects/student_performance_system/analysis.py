@@ -11,11 +11,14 @@ df.info()
 
 print("\nMissing values: \n",df.isnull().sum())
 
-print("\nDuplicate values: \n",df.duplicated().sum())
+print("\nDuplicate Rows:", df.duplicated().sum())
+
+print("\nCorrelation Matrix:\n")
+print(df.corr(numeric_only=True))
 
 #average marks 
 avg = df["marks"].mean()
-print("\nThe average marks is: \n",avg)
+print(f"\nAverage Marks: {avg:.2f}")
 
 # top marks
 top_marks = df[df["marks"]==df["marks"].max()]
@@ -26,6 +29,8 @@ low_marks = df[df["marks"]==df["marks"].min()]
 print("\nLowest makrs: \n",low_marks)
 
 ##plotting time baby.....
+
+plt.figure(figsize=(8,5))
 
 #Scattering plot
 plt.scatter(df["hours_studied"],df["marks"],color='blue',s=50)
@@ -52,7 +57,7 @@ for i,value in enumerate(df["marks"]):
     plt.text(df["student_id"][i],value+1,str(value),ha='center')
 
 plt.title("Student performance")
-plt.xlabel("Studnet id")
+plt.xlabel("Student ID")
 plt.ylabel("Marks")
 
 plt.savefig("projects/student_performance_system/outputs/bar_chart.png")

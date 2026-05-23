@@ -1,24 +1,27 @@
 # 🎓 Student Performance Analysis & Prediction System
 
-A beginner Machine Learning and Data Analysis project focused on analyzing student performance using Python.
-
-This project combines:
-- data analysis
-- visualization
-- preprocessing
-- machine learning concepts
-
-to study how different factors affect student marks.
+A beginner Machine Learning project built using **Python, Pandas, Matplotlib, and Scikit-learn** to analyze student performance and predict marks based on study-related factors.
 
 ---
 
-# 📌 Project Goals
+# 🚀 Project Overview
 
-- Analyze student performance data
-- Identify trends and patterns
-- Visualize relationships between features
-- Prepare dataset for machine learning models
-- Build a prediction system for student marks
+This project focuses on:
+
+- Data Analysis
+- Data Visualization
+- Correlation Analysis
+- Linear Regression
+- Model Evaluation
+- Custom Student Prediction
+
+The system analyzes how factors like:
+- study hours
+- attendance
+- sleep
+- practice tests
+
+affect student marks.
 
 ---
 
@@ -35,6 +38,8 @@ student_performance_system/
 │   └── bar_chart.png
 │
 ├── screenshots/
+│   ├── analysis_terminal.png
+│   └── model_terminal.png
 │
 ├── analysis.py
 ├── model.py
@@ -46,9 +51,7 @@ student_performance_system/
 
 # 📊 Dataset Features
 
-The dataset currently contains:
-
-| Column | Description |
+| Feature | Description |
 |---|---|
 | student_id | Unique student ID |
 | hours_studied | Daily study hours |
@@ -56,38 +59,116 @@ The dataset currently contains:
 | sleep_hours | Average sleep hours |
 | practice_tests | Number of practice tests |
 | marks | Final marks |
-| result | Pass/Fail result |
+| result | Pass/Fail |
 
 ---
 
-# ✅ Current Features Implemented
+# 🧠 Features Implemented
 
-## Data Analysis
+## ✅ Data Analysis
 - Dataset loading using Pandas
-- Dataset inspection
 - Missing value checking
-- Duplicate value checking
-- Statistical analysis
+- Duplicate row checking
+- Average marks calculation
+- Highest and lowest marks analysis
 
 ---
 
-## Insights Generated
-- Average marks
-- Highest marks
-- Lowest marks
+## ✅ Correlation Analysis
+Used correlation matrix to understand relationships between:
+- study hours
+- attendance
+- sleep hours
+- practice tests
+- marks
 
 ---
 
-## Visualizations
-### Scatter Plot
-- Hours Studied vs Marks
+## ✅ Data Visualization
+Created:
+- Scatter Plot
+- Bar Chart
 
-### Bar Chart
-- Student ID vs Marks
+using Matplotlib.
 
-Graphs are automatically saved inside:
-```bash
-outputs/
+---
+
+# 📈 Visual Outputs
+
+## 📊 Student Performance Bar Chart
+
+![Bar Chart](outputs/bar_chart.png)
+
+---
+
+## 📉 Hours Studied vs Marks Scatter Plot
+
+![Scatter Plot](outputs/scatter_plot.png)
+
+---
+
+# 🤖 Machine Learning Model
+
+Implemented:
+- Linear Regression
+- Train-Test Split
+- Custom User Prediction
+
+using Scikit-learn.
+
+---
+
+# 📌 Model Workflow
+
+```text
+Load Dataset
+→ Feature Selection
+→ Train-Test Split
+→ Train Model
+→ Predict Marks
+→ Evaluate Model
+→ Custom Prediction
+```
+
+---
+
+# 📊 Model Evaluation Metrics
+
+| Metric | Value |
+|---|---|
+| R² Score | 0.98 |
+| MAE | 2.7 |
+| MSE | 8.21 |
+
+---
+
+# 🖥 Terminal Outputs
+
+## 📌 Analysis Output
+
+![Analysis Output](screenshots/analysis_terminal.png)
+
+---
+
+## 📌 Model Prediction Output
+
+![Model Output](screenshots/model_terminal.png)
+
+---
+
+# 🎯 Custom Prediction Example
+
+Input:
+```text
+Study Hours: 6
+Attendance: 90
+Sleep Hours: 7
+Practice Tests: 8
+```
+
+Predicted Marks:
+```text
+88.12
 ```
 
 ---
@@ -97,21 +178,22 @@ outputs/
 - Python
 - Pandas
 - Matplotlib
+- Scikit-learn
 
 ---
 
 # 🚀 Future Improvements
 
 Planned future additions:
-- Linear Regression model
 - Logistic Regression
-- Train-test split
-- Model evaluation
-- Prediction system
-- Streamlit web app
+- Classification models
+- Better datasets
+- Streamlit Web App
+- Deployment
 
 ---
 
-# 🎯 Purpose Of This Project
+# 👨‍💻 Author
 
-This project is part of a larger Python → AI learning journey focused on building practical projects instead of only following tutorials.
+Ashwani  
+CSAI Student | Python & AI Learning Journey
