@@ -14,6 +14,7 @@ This project focuses on:
 - Linear Regression
 - Model Evaluation
 - Custom Student Prediction
+- Project Integration using `main.py`
 
 The system analyzes how factors like:
 - study hours
@@ -35,7 +36,8 @@ student_performance_system/
 │
 ├── outputs/
 │   ├── scatter_plot.png
-│   └── bar_chart.png
+│   ├── bar_chart.png
+│   └── actual_vs_predicted.png
 │
 ├── screenshots/
 │   ├── analysis_terminal.png
@@ -88,6 +90,7 @@ Used correlation matrix to understand relationships between:
 Created:
 - Scatter Plot
 - Bar Chart
+- Actual vs Predicted Graph
 
 using Matplotlib.
 
@@ -107,11 +110,19 @@ using Matplotlib.
 
 ---
 
+## 📈 Actual vs Predicted Marks
+
+![Actual vs Predicted](outputs/actual_vs_predicted.png)
+
+---
+
 # 🤖 Machine Learning Model
 
 Implemented:
 - Linear Regression
 - Train-Test Split
+- Model Evaluation
+- Feature Interpretation
 - Custom User Prediction
 
 using Scikit-learn.
@@ -127,6 +138,7 @@ Load Dataset
 → Train Model
 → Predict Marks
 → Evaluate Model
+→ Visualize Predictions
 → Custom Prediction
 ```
 
@@ -173,6 +185,22 @@ Predicted Marks:
 
 ---
 
+# ▶️ Running the Project
+
+Run the complete integrated system using:
+
+```bash
+python main.py
+```
+
+Menu Options:
+- `1` → Run Data Analysis
+- `2` → Run Prediction System
+
+The project is integrated through `main.py` for easier execution.
+
+---
+
 # 🛠 Technologies Used
 
 - Python
@@ -185,7 +213,6 @@ Predicted Marks:
 # 🚀 Future Improvements
 
 Planned future additions:
-- Logistic Regression
 - Classification models
 - Better datasets
 - Streamlit Web App

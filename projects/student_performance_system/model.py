@@ -1,7 +1,10 @@
 import pandas as pd
+import matplotlib.pyplot as plt
 from sklearn.linear_model import LinearRegression
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import mean_absolute_error,r2_score,mean_squared_error
+
+
 
 df = pd.read_csv("F:/python ai journey/projects/student_performance_system/data/student_data.csv")
 
@@ -20,8 +23,31 @@ x_train,x_test,y_train,y_test = train_test_split(
 model = LinearRegression()
 model.fit(x_train,y_train)
 
+print("\nModel Coefficients:")
+print(model.coef_.round(2))
+
+print("\nModel Intercept:")
+print(model.intercept_.round(2),"\n")
+
 #Predict 
 y_pred = model.predict(x_test)
+
+#Visualization
+
+plt.plot(y_test.values, marker='o',color='blue', label="Actual")
+plt.plot(y_pred, marker='x',color='red', label="Predicted")
+
+plt.title("Actual VS Predicted Marks")
+plt.xlabel("Actual Marks")
+plt.ylabel("Predicted Marks")
+
+plt.grid(True)
+
+plt.legend()
+
+plt.savefig("F:/python ai journey/projects/student_performance_system/outputs/actual_vs_predicted.png")
+plt.show()
+
 
 #Evaluation 
 r2 = r2_score(y_test,y_pred)
@@ -39,7 +65,7 @@ new_data = pd.DataFrame(
     columns=["hours_studied", "attendance", "sleep_hours", "practice_tests"]
 )
 
-#New data for predcition
+#New data for prediction
 c_pred = model.predict(new_data)
 
 #Print information
