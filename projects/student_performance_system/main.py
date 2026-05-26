@@ -1,5 +1,6 @@
-import os
+import os 
 
+print("Hello, Welcome to this system\nFollow the instruction ahead to run this system")
 print('''Use 1 for run Analysis
 2 for Prediction System''')
 
