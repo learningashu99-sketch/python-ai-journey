@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import os
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
-df = pd.read_csv("F:/python ai journey/projects/student_performance_system/data/student_data.csv")
+df = pd.read_csv("F:/python ai journey/projects/ai-ml-projects/student_performance_system/data/student_data.csv")
 
 print("\nFirst row:\n")
 print(df.head(),"\n")
@@ -44,7 +44,7 @@ plt.title("Hours studied VS Marks")
 plt.xlabel("Hours studied")
 plt.ylabel("Marks")
 
-plt.savefig("F:/python ai journey/projects/student_performance_system/outputs/scatter_plot.png")
+plt.savefig("F:/python ai journey/projects/ai-ml-projects/student_performance_system/outputs/scatter_plot.png")
 plt.show()
 
 
@@ -62,5 +62,5 @@ plt.title("Student performance")
 plt.xlabel("Student ID")
 plt.ylabel("Marks")
 
-plt.savefig("F:/python ai journey/projects/student_performance_system/outputs/bar_chart.png")
+plt.savefig("F:/python ai journey/projects/ai-ml-projects/student_performance_system/outputs/bar_chart.png")
 plt.show()

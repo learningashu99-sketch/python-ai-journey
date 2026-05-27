@@ -6,7 +6,7 @@ from sklearn.metrics import mean_absolute_error,r2_score,mean_squared_error
 
 
 
-df = pd.read_csv("F:/python ai journey/projects/student_performance_system/data/student_data.csv")
+df = pd.read_csv("F:/python ai journey/projects/ai-ml-projects/student_performance_system/data/student_data.csv")
 
 #input
 X = df[["hours_studied", "attendance", "sleep_hours", "practice_tests"]]
@@ -45,7 +45,7 @@ plt.grid(True)
 
 plt.legend()
 
-plt.savefig("F:/python ai journey/projects/student_performance_system/outputs/actual_vs_predicted.png")
+plt.savefig("F:/python ai journey/projects/ai-ml-projects/student_performance_system/outputs/actual_vs_predicted.png")
 plt.show()
 
 

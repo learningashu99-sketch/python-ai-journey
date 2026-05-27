@@ -29,27 +29,31 @@ affect student marks.
 # 📂 Project Structure
 
 ```bash
-student_performance_system/
+python ai journey/
 │
-├── data/
-│   └── student_data.csv
-│
-├── outputs/
-│   ├── scatter_plot.png
-│   ├── bar_chart.png
-│   └── actual_vs_predicted.png
-│
-├── screenshots/
-│   ├── analysis_terminal.png
-│   └── model_terminal.png
-│
-├── analysis.py
-├── model.py
-├── main.py
-└── README.md
+├── projects/
+│   │
+│   ├── ai-ml-projects/
+│   │   │
+│   │   └── student_performance_system/
+│   │       │
+│   │       ├── data/
+│   │       │   └── student_data.csv
+│   │       │
+│   │       ├── outputs/
+│   │       │   ├── scatter_plot.png
+│   │       │   ├── bar_chart.png
+│   │       │   └── actual_vs_predicted.png
+│   │       │
+│   │       ├── screenshots/
+│   │       │   ├── analysis_terminal.png
+│   │       │   └── model_terminal.png
+│   │       │
+│   │       ├── analysis.py
+│   │       ├── model.py
+│   │       ├── main.py
+│   │       └── README.md
 ```
-
----
 
 # 📊 Dataset Features
 

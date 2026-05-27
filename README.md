@@ -10,20 +10,29 @@
 
 # 📌 Overview
 
-This repository documents my journey of learning Python, Data Analysis, Machine Learning, and building practical AI-related projects.
+This repository documents my journey of learning:
+
+- Python Programming
+- Data Analysis
+- Machine Learning
+- Automation Development
+- Practical Project Building
 
 The focus is on:
 - hands-on learning
-- project building
-- problem solving
-- improving practical development skills
+- real project development
+- practical implementation
+- improving problem-solving skills
+- building production-style project structures
 
 ---
 
 # 📂 Repository Structure
 
 ```bash
-python-ai-journey/
+python ai journey/
+│
+├── datasets/
 │
 ├── learning/
 │   ├── week1_numpy/
@@ -32,9 +41,18 @@ python-ai-journey/
 │   └── week4_ml/
 │
 ├── projects/
-│   └── student_performance_system/
-│
-├── datasets/
+│   │
+│   ├── ai-ml-projects/
+│   │   │
+│   │   └── student_performance_system/
+│   │
+│   └── automation-projects/
+│       │
+│       ├── telegram_study_bot/
+│       │
+│       ├── pdf_toolkit/
+│       │
+│       └── future_tools/
 │
 └── README.md
 ```
@@ -43,47 +61,93 @@ python-ai-journey/
 
 # 🧠 Skills Covered
 
-## 🔢 NumPy
-- Array operations
-- Indexing & slicing
-- Reshaping arrays
-- Statistical functions
-
-## 📊 Pandas
-- DataFrames & Series
-- CSV handling
-- Data cleaning
-- Filtering & analysis
-
-## 📈 Data Visualization
-- Line plots
-- Bar charts
-- Scatter plots
-- Graph styling
-
-## 🤖 Machine Learning
-- Linear Regression
-- Logistic Regression
-- Decision Trees
-- Train-Test Split
-- Model Evaluation
+## 🔢 Python Fundamentals
+- Functions
+- Loops
+- Conditionals
+- File Handling
+- Exception Handling
+- Modules & Packages
 
 ---
 
-# 🚀 Current Project
+## 📊 Data Analysis
+- Pandas DataFrames
+- CSV Handling
+- Data Cleaning
+- Correlation Analysis
+- Statistical Insights
+
+---
+
+## 📈 Data Visualization
+- Line Plots
+- Scatter Plots
+- Bar Charts
+- Graph Styling
+- Data Interpretation
+
+---
+
+## 🤖 Machine Learning
+- Linear Regression
+- Model Training
+- Train-Test Split
+- Model Evaluation
+- Prediction Systems
+
+---
+
+## ⚙️ Automation & APIs
+- Telegram Bot Development
+- Command Handlers
+- API Integration
+- Task Automation
+- Event-Driven Programming
+
+---
+
+# 🚀 Current Projects
 
 ## 🎓 Student Performance Analysis & Prediction System
 
-Features:
-- Data cleaning
-- Student performance analysis
-- Visualization
-- ML prediction system
+A Machine Learning project that:
+- analyzes student performance
+- visualizes trends
+- predicts student marks using Linear Regression
 
-Tech used:
+### Tech Used
 - Pandas
 - Matplotlib
 - Scikit-learn
+
+---
+
+## 🤖 FocusFlow Telegram Bot
+
+A productivity-focused Telegram bot featuring:
+- task management
+- task completion tracking
+- command handling
+- interactive bot responses
+
+### Tech Used
+- Python
+- Telegram Bot API
+- python-telegram-bot
+- dotenv
+
+---
+
+# 🎯 Learning Goals
+
+Current focus areas:
+- strengthen Python fundamentals
+- build real-world projects
+- improve ML understanding
+- learn API-based systems
+- develop practical automation tools
+- create portfolio-quality projects
 
 ---
 
@@ -94,20 +158,24 @@ Tech used:
 - Pandas
 - Matplotlib
 - Scikit-learn
+- Telegram Bot API
 - VS Code
-- Jupyter Notebook
+- Git & GitHub
 
 ---
 
-# 🎯 Current Goals
+# 🚀 Future Roadmap
 
-- Build practical ML projects
-- Improve problem-solving skills
-- Develop project-based learning
-- Create freelancing-ready portfolio projects
+Planned future additions:
+- Classification ML Projects
+- NLP Projects
+- Streamlit Applications
+- PDF Automation Toolkit
+- Advanced Telegram Bot Features
+- Deployment & Hosting
 
 ---
 
 # 👨‍💻 About Me
 
-CSAI student learning Python, Data Analysis, and Machine Learning through consistent building and project development.
+CSAI student learning Python, AI, Machine Learning, and Automation Development through consistent project building and practical implementation.
