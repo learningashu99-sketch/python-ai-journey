@@ -3,6 +3,7 @@ from telegram.ext import Application, CommandHandler, ContextTypes
 
 from dotenv import load_dotenv
 import os
+import json
 
 #Load environment variables 
 load_dotenv()
@@ -10,7 +11,24 @@ load_dotenv()
 #Get bot token from .env
 BOT_TOKEN = os.getenv("BOT_TOKEN")
 
-tasks = []
+#load_task 
+
+def load_tasks():
+    try:
+        with open("data/tasks.json","r") as file:
+            return json.load(file)
+    except FileNotFoundError:
+        return []
+    
+tasks = load_tasks()
+
+#Save task to json file
+
+def save_tasks():
+
+    with open("data/tasks.json","w") as file:
+        json.dump(tasks, file, indent=4)
+
 
 #/START COMMAND
 
@@ -46,8 +64,15 @@ async def add_task(update: Update, context : ContextTypes.DEFAULT_TYPE):
         )
         return
     
+    user_id = str(update.effective_user.id)
+    if user_id not in tasks:
+        tasks[user_id] = []
+
     #Add task to list 
-    tasks.append(task)
+    tasks[user_id].append(task)
+
+    #save tasks
+    save_tasks()
 
     await update.message.reply_text(
         f"Task added successfully ✅\nTask: {task}"
@@ -56,6 +81,13 @@ async def add_task(update: Update, context : ContextTypes.DEFAULT_TYPE):
 #/TASKS COMMAND
 
 async def show_tasks(update: Update, context : ContextTypes.DEFAULT_TYPE):
+    
+    user_id = str(update.effective_user.id)
+    if user_id not in tasks:
+        await update.message.reply_text(
+            "No tasks available."
+    )
+        return
 
     #Check if no tasks exist
     if not tasks:
@@ -67,7 +99,7 @@ async def show_tasks(update: Update, context : ContextTypes.DEFAULT_TYPE):
     #Create tasks list
 
     task_list = "\n".join(
-         [f"{i+1}. {task}" for i, task in enumerate(tasks)]
+         [f"{i+1}. {task}" for i, task in enumerate(tasks[user_id])]
 
     )
 
@@ -77,6 +109,13 @@ async def show_tasks(update: Update, context : ContextTypes.DEFAULT_TYPE):
     
 # /done command
 async def done_task(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    
+    user_id = str(update.effective_user.id)
+    if user_id not in tasks:
+        await update.message.reply_text(
+            "No tasks available."
+    )
+        return
 
     # Check if user provided task number
     if not context.args:
@@ -90,14 +129,17 @@ async def done_task(update: Update, context: ContextTypes.DEFAULT_TYPE):
         task_number = int(context.args[0])
 
         # Check valid range
-        if task_number < 1 or task_number > len(tasks):
+        if task_number < 1 or task_number > len(tasks[user_id]):
             await update.message.reply_text(
                 "Invalid task number."
             )
             return
 
         # Remove task
-        removed_task = tasks.pop(task_number - 1)
+        removed_task = tasks[user_id].pop(task_number - 1)
+
+        # Save tasks
+        save_tasks()
 
         await update.message.reply_text(
             f"Task completed ✅\nRemoved: {removed_task}"
