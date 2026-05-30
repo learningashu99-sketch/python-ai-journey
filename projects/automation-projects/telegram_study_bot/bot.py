@@ -79,7 +79,8 @@ async def add_task(update: Update, context : ContextTypes.DEFAULT_TYPE):
     task_data = {
         "task":task,
         "priority":"Medium",
-        "created_at":current_time
+        "created_at":current_time,
+        "due_date":None
     }
 
     #Add task to list 
@@ -112,9 +113,12 @@ async def show_tasks(update: Update, context : ContextTypes.DEFAULT_TYPE):
     
     #Create tasks list
 
-    task_list = "\n".join(
+    task_list = "\n\n".join(
     [
-        f"{i+1}. {task['task']}\n   Priority: {task['priority']}\n   Added: {task['created_at']}"
+        f"{i+1}. {task['task']}\n"
+        f"   Priority: {task['priority']}\n"
+        f"   Added: {task['created_at']}\n"
+        f"   Due: {'Not Set' if task['due_date'] is None else task['due_date']}"
         for i, task in enumerate(tasks[user_id])
     ]
 )
@@ -276,7 +280,183 @@ async def stats(update, context):
         f"Low Priority: {low_count}"
     )
 
+async def set_due(update, context):
 
+    user_id = str(update.effective_user.id)
+
+    if user_id not in tasks:
+        await update.message.reply_text(
+            "No tasks available."
+        )
+        return
+
+    if len(context.args) not in [2,3]:
+        await update.message.reply_text(
+            "Usage:\n/setdue <task_number> <YYYY-MM-DD>\nOR\n/setdue <task_number> <YYYY-MM-DD HH:MM>"
+        )
+        return
+
+    try:
+        task_number = int(context.args[0])
+    except ValueError:
+        await update.message.reply_text(
+            "Task number must be a valid number."
+        )
+        return
+
+    if len(context.args) == 2:
+        due_date = context.args[1]
+
+    else:
+        due_date = context.args[1] + " " + context.args[2]
+
+    try:
+        try:
+            datetime.strptime(due_date, "%Y-%m-%d %H:%M")
+        except ValueError:
+            datetime.strptime(due_date, "%Y-%m-%d")
+
+    except ValueError:
+        await update.message.reply_text(
+            "Invalid format.\nUse:\nYYYY-MM-DD\nor\nYYYY-MM-DD HH:MM"
+        )
+        return
+
+    if task_number < 1 or task_number > len(tasks[user_id]):
+        await update.message.reply_text(
+            "Invalid task number."
+        )
+        return
+
+    tasks[user_id][task_number - 1]["due_date"] = due_date
+
+    save_tasks()
+
+    await update.message.reply_text(
+        f"⏰ Due date for task {task_number} set to {due_date}" 
+    )
+
+async def upcoming_tasks(update, context):
+
+    user_id = str(update.effective_user.id)
+
+    if user_id not in tasks:
+        await update.message.reply_text(
+            "No tasks available."
+        )
+        return
+
+    upcoming = []
+
+    for i, task in enumerate(tasks[user_id]):
+
+        due_date = task.get("due_date")
+
+        if due_date is not None:
+
+            try:
+                try:
+                    due_obj = datetime.strptime(
+                        due_date,
+                        "%Y-%m-%d %H:%M"
+                    )
+
+                except ValueError:
+                    due_obj = datetime.strptime(
+                        due_date,
+                        "%Y-%m-%d"
+                    )
+
+                upcoming.append(
+                    (i, task, due_obj)
+                )
+
+            except ValueError:
+                continue
+
+    if not upcoming:
+        await update.message.reply_text(
+            "No upcoming tasks."
+        )
+        return
+
+    upcoming.sort(key=lambda x: x[2])
+
+    task_list = "\n\n".join(
+        [
+            f"{i+1}. {task['task']}\n"
+            f"   Priority: {task['priority']}\n"
+            f"   Due: {task['due_date']}"
+            for i, task, _ in upcoming
+        ]
+    )
+
+    await update.message.reply_text(
+        f"📅 Upcoming Tasks:\n\n{task_list}"
+    )
+
+async def overdue_tasks(update, context):
+
+    user_id = str(update.effective_user.id)
+
+    if user_id not in tasks:
+        await update.message.reply_text(
+            "No tasks available."
+        )
+        return
+
+    overdue = []
+
+    current_time = datetime.now()
+
+    for i, task in enumerate(tasks[user_id]):
+
+        due_date = task.get("due_date")
+
+        if due_date is not None:
+
+            try:
+                try:
+                    due_obj = datetime.strptime(
+                        due_date,
+                        "%Y-%m-%d %H:%M"
+                    )
+
+                except ValueError:
+                    due_obj = datetime.strptime(
+                        due_date,
+                        "%Y-%m-%d"
+                    )
+
+                if due_obj < current_time:
+
+                    overdue.append(
+                        (i, task, due_obj)
+                    )
+
+            except ValueError:
+                continue
+
+    if not overdue:
+        await update.message.reply_text(
+            "🎉 No overdue tasks."
+        )
+        return
+
+    overdue.sort(key=lambda x: x[2])
+
+    task_list = "\n\n".join(
+        [
+            f"{i+1}. {task['task']}\n"
+            f"   Priority: {task['priority']}\n"
+            f"   Due: {task['due_date']}"
+            for i, task, _ in overdue
+        ]
+    )
+
+    await update.message.reply_text(
+        f"⚠️ Overdue Tasks:\n\n{task_list}"
+    )
 
 
 #Main function
@@ -294,6 +474,10 @@ def main():
     app.add_handler(CommandHandler("setpriority", set_priority))
     app.add_handler(CommandHandler("highpriority", high_priority_tasks))
     app.add_handler(CommandHandler("stats", stats))
+    app.add_handler(CommandHandler("setdue", set_due))
+    app.add_handler(CommandHandler("upcoming",upcoming_tasks))
+    app.add_handler(CommandHandler("overdue",overdue_tasks))
+
 
     #Run bot
     print("Bot is running...")
