@@ -1,9 +1,8 @@
 import pandas as pd
 import matplotlib.pyplot as plt
-import os
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
-df = pd.read_csv("F:/python ai journey/projects/ai-ml-projects/student_performance_system/data/student_data.csv")
+
+df = pd.read_csv("projects/ai-ml-projects/student_performance_system/data/student_data.csv")
 
 print("\nFirst row:\n")
 print(df.head(),"\n")

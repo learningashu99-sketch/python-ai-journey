@@ -13,5 +13,8 @@ if choice == "1":
 elif choice == "2":
     os.system("python model.py")
 
+elif choice == "3":
+    os.system("python classication_model.py")
+
 else:
     print("\nInvalid Choice \nExiting the system.....")
