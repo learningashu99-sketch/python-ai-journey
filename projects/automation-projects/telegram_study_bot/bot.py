@@ -21,7 +21,7 @@ def load_tasks():
         with open("data/tasks.json","r") as file:
             return json.load(file)
     except FileNotFoundError:
-        return []
+        return {}
     
 tasks = load_tasks()
 
@@ -80,7 +80,8 @@ async def add_task(update: Update, context : ContextTypes.DEFAULT_TYPE):
         "task":task,
         "priority":"Medium",
         "created_at":current_time,
-        "due_date":None
+        "due_date":None,
+        "reminded": False
     }
 
     #Add task to list 
@@ -329,6 +330,7 @@ async def set_due(update, context):
         return
 
     tasks[user_id][task_number - 1]["due_date"] = due_date
+    tasks[user_id][task_number - 1]["reminded"] = False
 
     save_tasks()
 
@@ -458,6 +460,53 @@ async def overdue_tasks(update, context):
         f"⚠️ Overdue Tasks:\n\n{task_list}"
     )
 
+async def reminder_checker(context):
+
+    current_time = datetime.now()
+
+    for user_id, user_tasks in tasks.items():
+
+        for task in user_tasks:
+
+            due_date = task.get("due_date")
+
+            if due_date is None:
+                continue
+
+            try:
+
+                try:
+                    due_time = datetime.strptime(
+                        due_date,
+                        "%Y-%m-%d %H:%M"
+                    )
+
+                except ValueError:
+                    continue
+
+                time_left = due_time - current_time
+
+                if (
+                    time_left.total_seconds() <= 3600
+                    and time_left.total_seconds() > 0
+                    and not task.get("reminded", False)
+                ):
+
+                    await context.bot.send_message(
+                        chat_id=user_id,
+                        text=(
+                            f"🔔 Reminder!\n\n"
+                            f"Task: {task['task']}\n"
+                            f"Due: {due_date}"
+                        )
+                    )
+
+                    task["reminded"] = True
+
+                    save_tasks()
+
+            except Exception:
+                continue
 
 #Main function
 
@@ -478,6 +527,14 @@ def main():
     app.add_handler(CommandHandler("upcoming",upcoming_tasks))
     app.add_handler(CommandHandler("overdue",overdue_tasks))
 
+    # Reminder Job
+    job_queue = app.job_queue
+
+    job_queue.run_repeating(
+        reminder_checker,
+        interval=60,
+        first=10
+    )
 
     #Run bot
     print("Bot is running...")
