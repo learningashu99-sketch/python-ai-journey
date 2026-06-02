@@ -23,7 +23,17 @@ def load_tasks():
     except FileNotFoundError:
         return {}
     
+
+
+def load_user_stats():
+    try:
+        with open("data/user_stats.json", "r") as file:
+            return json.load(file)
+    except FileNotFoundError:
+        return {}
+    
 tasks = load_tasks()
+user_stats = load_user_stats()
 
 #Save task to json file
 
@@ -31,6 +41,11 @@ def save_tasks():
 
     with open("data/tasks.json","w") as file:
         json.dump(tasks, file, indent=4)
+
+
+def save_user_stats():
+    with open("data/user_stats.json", "w") as file:
+        json.dump(user_stats, file, indent=4)
 
 
 #/START COMMAND
@@ -155,6 +170,42 @@ async def done_task(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 "Invalid task number."
             )
             return
+        
+        if user_id not in user_stats:
+            user_stats[user_id] = {
+                "streak": 0,
+                "last_completed_date": None
+            }
+
+        today = datetime.now().date()
+
+        last_date = user_stats[user_id]["last_completed_date"]
+
+        if last_date is None:
+
+            user_stats[user_id]["streak"] = 1
+
+        else:
+
+            last_date = datetime.strptime(
+                last_date,
+                "%Y-%m-%d"
+            ).date()
+
+            difference = (today - last_date).days
+
+            if difference == 0:
+                pass
+
+            elif difference == 1:
+                user_stats[user_id]["streak"] += 1
+
+            else:
+                user_stats[user_id]["streak"] = 1
+
+        user_stats[user_id]["last_completed_date"] = str(today)
+
+        save_user_stats()
 
         # Remove task
         removed_task = tasks[user_id].pop(task_number - 1)
@@ -163,7 +214,8 @@ async def done_task(update: Update, context: ContextTypes.DEFAULT_TYPE):
         save_tasks()
 
         await update.message.reply_text(
-            f"✅ Task completed: {removed_task['task']}"
+            f"✅ Task completed: {removed_task['task']}\n\n"
+            f"🔥 Current Streak: {user_stats[user_id]['streak']} day(s)"
         )
 
 
@@ -508,6 +560,26 @@ async def reminder_checker(context):
             except Exception:
                 continue
 
+
+
+async def streak(update, context):
+
+    user_id = str(update.effective_user.id)
+
+    if user_id not in user_stats:
+        await update.message.reply_text(
+            "🔥 Current Streak: 0 days"
+        )
+        return
+
+    current_streak = user_stats[user_id]["streak"]
+
+    await update.message.reply_text(
+        f"🔥 Current Streak: {current_streak} day(s)"
+    )
+
+
+
 #Main function
 
 def main():
@@ -526,6 +598,7 @@ def main():
     app.add_handler(CommandHandler("setdue", set_due))
     app.add_handler(CommandHandler("upcoming",upcoming_tasks))
     app.add_handler(CommandHandler("overdue",overdue_tasks))
+    app.add_handler(CommandHandler("streak", streak))
 
     # Reminder Job
     job_queue = app.job_queue
