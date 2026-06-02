@@ -34,6 +34,7 @@ def load_user_stats():
     
 tasks = load_tasks()
 user_stats = load_user_stats()
+active_pomodoros = {}
 
 #Save task to json file
 
@@ -578,6 +579,102 @@ async def streak(update, context):
         f"🔥 Current Streak: {current_streak} day(s)"
     )
 
+async def pomodoro_complete(context):
+
+    job = context.job
+
+    user_id = str(job.data)
+
+    if user_id in active_pomodoros:
+        del active_pomodoros[user_id]
+
+    # Create stats for old/new users
+    if user_id not in user_stats:
+        user_stats[user_id] = {
+            "streak": 0,
+            "last_completed_date": None,
+            "pomodoros_completed": 0
+        }
+
+    # Add 1 completed pomodoro
+    user_stats[user_id]["pomodoros_completed"] = (
+        user_stats[user_id].get("pomodoros_completed", 0) + 1
+    )
+
+    save_user_stats()
+
+    await context.bot.send_message(
+        chat_id=int(user_id),
+        text=(
+            f"🎉 Pomodoro Complete!\n\n"
+            f"Great work! Take a short break.\n\n"
+            f"🍅 Total Pomodoros: "
+            f"{user_stats[user_id]['pomodoros_completed']}"
+        )
+    )
+
+async def pomodoro(update, context):
+
+    user_id = str(update.effective_user.id)
+
+    if user_id in active_pomodoros:
+
+        await update.message.reply_text(
+            "⚠️ You already have an active Pomodoro session."
+        )
+        return
+
+    if len(context.args) != 1:
+
+        await update.message.reply_text(
+            "Usage: /pomodoro <minutes>"
+        )
+        return
+
+    try:
+        minutes = int(context.args[0])
+
+    except ValueError:
+
+        await update.message.reply_text(
+            "Minutes must be a number."
+        )
+        return
+
+    active_pomodoros[user_id] = True
+
+    context.job_queue.run_once(
+        pomodoro_complete,
+        when=minutes * 60,
+        data=user_id
+    )
+
+    await update.message.reply_text(
+        f"🍅 Pomodoro started!\n\n"
+        f"Focus for {minutes} minute(s)."
+    )
+
+async def pomodoro_stats(update, context):
+
+    user_id = str(update.effective_user.id)
+
+    if user_id not in user_stats:
+
+        await update.message.reply_text(
+            "🍅 Pomodoros Completed: 0"
+        )
+        return
+
+    completed = user_stats[user_id].get(
+        "pomodoros_completed",
+        0
+    )
+
+    await update.message.reply_text(
+        f"🍅 Pomodoros Completed: {completed}"
+    )
+
+
 
 
 #Main function
@@ -599,6 +696,7 @@ def main():
     app.add_handler(CommandHandler("upcoming",upcoming_tasks))
     app.add_handler(CommandHandler("overdue",overdue_tasks))
     app.add_handler(CommandHandler("streak", streak))
+    app.add_handler(CommandHandler("pomodoro", pomodoro))
 
     # Reminder Job
     job_queue = app.job_queue
