@@ -62,11 +62,37 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
 async def help_command(update: Update, context : ContextTypes.DEFAULT_TYPE):   
 
     help_text = """
-/start - Start the bot
-/help - Show commands
-/addtask - Add a new task
+🚀 FocusFlow Commands
+
+📋 Task Management
+/addtask <task> - Add a new task
 /tasks - View all tasks
+/done <task_number> - Mark a task as completed
+
+🔥 Priority Management
+/setpriority <task_number> <High|Medium|Low>
+/highpriority - View all high-priority tasks
+
+⏰ Due Dates & Reminders
+/setdue <task_number> <YYYY-MM-DD>
+/setdue <task_number> <YYYY-MM-DD HH:MM>
+/upcoming - View upcoming tasks
+/overdue - View overdue tasks
+
+📈 Productivity
+/stats - Task statistics
+/streak - View current streak
+/analytics - Productivity dashboard
+
+🍅 Focus Tools
+/pomodoro <minutes> - Start a Pomodoro session
+/pomodorostats - View completed Pomodoros
+
+ℹ️ General
+/start - Start the bot
+/help - Show this help menu
 """
+
     await update.message.reply_text(help_text)
 
 #ADDTASK COMMAND
@@ -674,6 +700,55 @@ async def pomodoro_stats(update, context):
         f"🍅 Pomodoros Completed: {completed}"
     )
 
+async def analytics(update, context):
+
+    user_id = str(update.effective_user.id)
+
+    # Streak
+    streak = 0
+
+    if user_id in user_stats:
+        streak = user_stats[user_id].get(
+            "streak",
+            0
+        )
+
+    # Pomodoros
+    pomodoros = 0
+
+    if user_id in user_stats:
+        pomodoros = user_stats[user_id].get(
+            "pomodoros_completed",
+            0
+        )
+
+    # Tasks
+    total_tasks = 0
+    high_priority = 0
+    due_dates = 0
+
+    if user_id in tasks:
+
+        total_tasks = len(tasks[user_id])
+
+        for task in tasks[user_id]:
+
+            if task["priority"] == "High":
+                high_priority += 1
+
+            if task["due_date"] is not None:
+                due_dates += 1
+
+    await update.message.reply_text(
+        f"📊 FocusFlow Analytics\n\n"
+        f"🔥 Current Streak: {streak} day(s)\n\n"
+        f"🍅 Pomodoros Completed: {pomodoros}\n\n"
+        f"📋 Active Tasks: {total_tasks}\n\n"
+        f"🚨 High Priority Tasks: {high_priority}\n\n"
+        f"⏰ Tasks With Due Dates: {due_dates}"
+    )
+
+
 
 
 
@@ -697,6 +772,7 @@ def main():
     app.add_handler(CommandHandler("overdue",overdue_tasks))
     app.add_handler(CommandHandler("streak", streak))
     app.add_handler(CommandHandler("pomodoro", pomodoro))
+    app.add_handler(CommandHandler("analytics",analytics))
 
     # Reminder Job
     job_queue = app.job_queue
