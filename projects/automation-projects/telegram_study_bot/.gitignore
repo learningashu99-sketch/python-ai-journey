@@ -1,4 +1,5 @@
 .env
+focusflow.db
 __pycache__/
 *.pyc
 data/tasks.json
