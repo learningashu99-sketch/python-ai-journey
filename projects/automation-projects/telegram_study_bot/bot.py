@@ -67,11 +67,11 @@ async def help_command(update: Update, context : ContextTypes.DEFAULT_TYPE):
 📋 Task Management
 /addtask <task> - Add a new task
 /tasks - View all tasks
-/done <task_number> - Mark a task as completed
+/done <task_number> - Complete a task
 
 🔥 Priority Management
 /setpriority <task_number> <High|Medium|Low>
-/highpriority - View all high-priority tasks
+/highpriority - View high-priority tasks
 
 ⏰ Due Dates & Reminders
 /setdue <task_number> <YYYY-MM-DD>
@@ -81,11 +81,12 @@ async def help_command(update: Update, context : ContextTypes.DEFAULT_TYPE):
 
 📈 Productivity
 /stats - Task statistics
-/streak - View current streak
+/streak - View study streak
 /analytics - Productivity dashboard
 
 🍅 Focus Tools
 /pomodoro <minutes> - Start a Pomodoro session
+/cancelpomodoro - Cancel active Pomodoro
 /pomodorostats - View completed Pomodoros
 
 ℹ️ General
@@ -667,13 +668,13 @@ async def pomodoro(update, context):
         )
         return
 
-    active_pomodoros[user_id] = True
-
-    context.job_queue.run_once(
-        pomodoro_complete,
-        when=minutes * 60,
-        data=user_id
+    job = context.job_queue.run_once(
+    pomodoro_complete,
+    when=minutes * 60,
+    data=user_id
     )
+    
+    active_pomodoros[user_id] = job
 
     await update.message.reply_text(
         f"🍅 Pomodoro started!\n\n"
@@ -699,6 +700,28 @@ async def pomodoro_stats(update, context):
     await update.message.reply_text(
         f"🍅 Pomodoros Completed: {completed}"
     )
+
+async def cancel_pomodoro(update, context):
+
+    user_id = str(update.effective_user.id)
+
+    job = active_pomodoros.get(user_id)
+
+    if not job:
+
+        await update.message.reply_text(
+            "❌ No active Pomodoro session found."
+        )
+        return
+
+    job.schedule_removal()
+
+    del active_pomodoros[user_id]
+
+    await update.message.reply_text(
+        "🛑 Pomodoro session cancelled."
+    )
+
 
 async def analytics(update, context):
 
@@ -773,6 +796,8 @@ def main():
     app.add_handler(CommandHandler("streak", streak))
     app.add_handler(CommandHandler("pomodoro", pomodoro))
     app.add_handler(CommandHandler("analytics",analytics))
+    app.add_handler(CommandHandler("pomodorostats",pomodoro_stats))
+    app.add_handler(CommandHandler("cancelpomodoro",cancel_pomodoro))
 
     # Reminder Job
     job_queue = app.job_queue
